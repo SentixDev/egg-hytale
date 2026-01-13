@@ -11,9 +11,6 @@ This egg provides an automated installation and startup configuration for Hytale
 
 Both Pelican Panel and Pterodactyl Panel are fully supported with dedicated egg files for each platform.
 
-> [!WARNING]
-> **Server Status Reporting**: There is currently one known issue where the panel does not correctly detect when the server has started. This is because the "Start configuration" cannot be properly configured yet - the official Hytale server files have not been publicly released. Once the server files are available, this will be fixed immediately. The egg itself works perfectly fine; it just doesn't report the server status correctly to the panel.
-
 ## Features
 
 - Automated Hytale server installation
@@ -61,6 +58,7 @@ The following options can be configured:
 | `Enable Backups` | Enable automatic backups | `false` |
 | `Backup Directory` | Directory where backups are saved | `/backup` |
 | `Backup Frequency` | Backup interval in minutes | `30` |
+| `Patchline` | What release channel you want to use | `release` |
 
 ### First-Time Authentication
 
