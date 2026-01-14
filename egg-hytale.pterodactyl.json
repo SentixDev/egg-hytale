@@ -4,7 +4,7 @@
         "version": "PTDL_v2",
         "update_url": "https:\/\/raw.githubusercontent.com\/NATroutter\/egg-hytale\/refs\/heads\/main\/egg-hytale.pterodactyl.json"
     },
-    "exported_at": "2026-01-14T18:03:32+02:00",
+    "exported_at": "2026-01-14T20:53:20+02:00",
     "name": "Hytale",
     "author": "contact@natroutter.fi",
     "description": "Hytale is a block-based sandbox game that blends creative building with RPG adventure. Explore procedurally generated worlds filled with unique biomes, dungeons, and creatures. Build anything from simple homes to grand castles, craft items, and battle monsters. Create custom content with built-in modding tools, host your own servers, and shape the experience with plugins and mods. Play solo or with friends in a world designed for both creation and exploration.\r\n\r\nCredits:\r\n- Made by NATroutter\r\n- https:\/\/natroutter.fi\r\n- https:\/\/github.com\/NATroutter",
@@ -25,7 +25,7 @@
     "scripts": {
         "installation": {
             "script": "#!\/bin\/bash\r\nDOWNLOAD_URL=\"https:\/\/downloader.hytale.com\/hytale-downloader.zip\"\r\nDOWNLOAD_FILE=\"hytale-downloader.zip\"\r\n\r\napt update\r\napt install -y curl unzip jq\r\n\r\ncd \/mnt\/server\r\n\r\n# Downloads and extracts the Hytale downloader\r\necho \"Starting Hytale downloader installation...\"\r\n\r\n# Download the file\r\necho \"Downloading hytale-downloader.zip...\"\r\ncurl -L -o \"${DOWNLOAD_FILE}\" \"${DOWNLOAD_URL}\"\r\n\r\nif [ $? -ne 0 ]; then\r\n    echo \"Error: Failed to download ${DOWNLOAD_URL}\"\r\n    exit 1\r\nfi\r\n\r\necho \"Download completed successfully.\"\r\n\r\n# Extract the zip file\r\necho \"Extracting ${DOWNLOAD_FILE}...\"\r\nunzip -o \"${DOWNLOAD_FILE}\"\r\n\r\nif [ $? -ne 0 ]; then\r\n    echo \"Error: Failed to extract ${DOWNLOAD_FILE}\"\r\n    exit 1\r\nfi\r\n\r\necho \"Extraction completed successfully.\"\r\n\r\n# Remove the unnessasery file\r\necho \"Cleaning up...\"\r\nrm \"${DOWNLOAD_FILE}\"\r\nrm QUICKSTART.md\r\nrm hytale-downloader-windows-amd64.exe\r\n\r\n#Creating the empty version file for version checks\r\nif [ ! -f \"\/mnt\/server\/version.txt\" ]; then\r\n    echo \"Creating version check file...\"\r\n    touch \/mnt\/server\/version.txt\r\n    chmod 666 \/mnt\/server\/version.txt\r\nelse\r\n    echo \"Version check file already exists!\"\r\nfi\r\n\r\n#Creating the empty version file for version checks\r\nif [ ! -f \"\/mnt\/server\/.hytale-auth-tokens.json\" ]; then\r\n    echo \"Creating auth cache file...\"\r\n    touch \/mnt\/server\/.hytale-auth-tokens.json\r\n    chmod 666 \/mnt\/server\/.hytale-auth-tokens.json\r\nelse\r\n    echo \"Auth cache already exists!\"\r\nfi\r\n\r\n# Check if the directory exists\r\nif [ ! -d \"\/mnt\/server\/backup\" ]; then\r\n    echo \"Backup directory does not exist. Creating it...\"\r\n    mkdir -p \/mnt\/server\/backup\r\n\r\n    if [ $? -ne 0 ]; then\r\n        echo \"Failed to create backup directory: \/backup\"\r\n        exit 1\r\n    fi\r\nelse\r\n    echo \"Backup directory already exists.\"\r\nfi\r\nchmod -R 755 \/mnt\/server\/backup\r\n\r\necho \"Setting executable permissions...\"\r\nchmod +x .\/hytale-downloader-linux-amd64\r\n\r\necho \"Installation complete!\"",
-            "container": "ghcr.io\/pterodactyl\/installers:debian",
+            "container": "ghcr.io\/pelican-eggs\/installers:debian",
             "entrypoint": "bash"
         }
     },
